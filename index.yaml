@@ -13,7 +13,7 @@ entries:
       catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
     apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-04-03T17:02:23.113130084Z"
+    created: "2025-04-03T17:02:22.734803257Z"
     description: Flux UI Extension for interracting with Flux toolkit resources
     digest: a4fec324ba4042dc617579d9ed36cab367d1817a41e74b4da518c88bfb77cd9d
     icon: https://raw.githubusercontent.com/mqufflc/flux-rancher-ui-extension/main/pkg/flux/assets/flux-logo.svg
@@ -42,4 +42,4 @@ entries:
     urls:
     - assets/flux/flux-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-03T17:02:23.112535139Z"
+generated: "2025-04-03T17:02:22.734263541Z"
