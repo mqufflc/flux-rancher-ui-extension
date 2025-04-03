@@ -1,0 +1,8 @@
+plugin/flux-0.1.1.umd.min.37.js
+plugin/flux-0.1.1.umd.min.37.js.map
+plugin/flux-0.1.1.umd.min.60.js
+plugin/flux-0.1.1.umd.min.60.js.map
+plugin/flux-0.1.1.umd.min.js
+plugin/flux-0.1.1.umd.min.js.map
+plugin/img/harvester.20240f8a.png
+plugin/package.json
