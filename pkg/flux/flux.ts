@@ -15,6 +15,7 @@ export function init($plugin: IPlugin, store: any) {
     icon:    'gear',
     inStore: 'cluster',
     weight:  50,
+    showNamespaceFilter: true,
     to:      {
       name:   `c-cluster-${ FLUX_PRODUCT_NAME }-${ FLUX_DASHBOARD_PAGE_NAME }`,
       params: { product: FLUX_PRODUCT_NAME },
