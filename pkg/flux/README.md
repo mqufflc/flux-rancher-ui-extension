@@ -4,7 +4,7 @@ This extension adds several dedicated pages to interact with Flux toolkit resour
 
 ## Features
 
-- Flux resource pages (List and Details for now, more to come later)
+- Flux resource pages (List for now, more to come later)
 - Reconcile Flux resources from Rancher UI
 
 ## Installation

@@ -1,8 +1,8 @@
 {
   "name": "flux",
-  "description": "Flux UI Extension for interracting with Flux toolkit resources",
+  "description": "Rancher UI Extension for Flux. Provides a way to interact with Flux resources",
   "icon": "https://raw.githubusercontent.com/mqufflc/flux-rancher-ui-extension/main/pkg/flux/assets/flux-logo.svg",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": false,
   "rancher": {
     "annotations": {
