@@ -15,6 +15,7 @@ export function init($plugin: IPlugin, store: any) {
   product({
     icon:    'gear',
     inStore: 'cluster',
+    ifHaveGroup: 'source.toolkit.fluxcd.io',
     weight:  50,
     showNamespaceFilter: true,
     to:      {
