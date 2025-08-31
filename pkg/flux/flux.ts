@@ -18,13 +18,13 @@ export function init($plugin: IPlugin, store: any) {
     ifHaveGroup: 'source.toolkit.fluxcd.io',
     weight:  50,
     showNamespaceFilter: true,
-    to:      {
-      name:   `c-cluster-${ FLUX_PRODUCT_NAME }-${ FLUX_DASHBOARD_PAGE_NAME }`,
-      params: { product: FLUX_PRODUCT_NAME },
-      meta: {
-        product: FLUX_PRODUCT_NAME
-      }
-    }
+    // to:      {
+    //   name:   `c-cluster-${ FLUX_PRODUCT_NAME }-${ FLUX_DASHBOARD_PAGE_NAME }`,
+    //   params: { product: FLUX_PRODUCT_NAME },
+    //   meta: {
+    //     product: FLUX_PRODUCT_NAME
+    //   }
+    // }
   });
 
   configureType(KUSTOMIZATION_RESOURCE_NAME, {
