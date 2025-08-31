@@ -1,0 +1,20 @@
+{
+  "name": "flux",
+  "description": "Rancher UI Extension for Flux. Provides a way to interact with Flux resources",
+  "icon": "https://raw.githubusercontent.com/mqufflc/flux-rancher-ui-extension/main/pkg/flux/assets/flux-logo.svg",
+  "version": "0.2.1",
+  "private": false,
+  "rancher": true,
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0"
+  },
+  "files": [
+    "**/*"
+  ],
+  "main": "flux-0.2.1.umd.min.js"
+}

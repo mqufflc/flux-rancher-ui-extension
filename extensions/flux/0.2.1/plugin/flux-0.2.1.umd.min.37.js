@@ -1,0 +1,2 @@
+(("undefined"!==typeof self?self:this)["webpackChunkflux_0_2_1"]=("undefined"!==typeof self?self:this)["webpackChunkflux_0_2_1"]||[]).push([[37],{49037:function(e){const n=[{flux:{"dashboard-menu-label":"Dashboard","reconcile-action-label":"Reconcile",kustomization:{section:{inventory:{label:"Inventory"}}}}}];e.exports=n.length<=1?n[0]:n}}]);
+//# sourceMappingURL=flux-0.2.1.umd.min.37.js.map
