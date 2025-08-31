@@ -13,17 +13,22 @@ export default function (plugin: IPlugin): void {
   // Provide plugin metadata from package.json
   plugin.metadata = require('./package.json');
 
-  // Load a product
+  // Load flux product
   plugin.addProduct(require('./flux'));
 
   plugin.addAction(
     ActionLocation.TABLE,
-    { resource: [BUCKET_RESOURCE_NAME, GIT_REPOSITORY_RESOURCE_NAME, HELM_CHART_RESOURCE_NAME, HELM_REPOSITORY_RESOURCE_NAME, OCI_REPOSITORY_RESOURCE_NAME, KUSTOMIZATION_RESOURCE_NAME, HELM_RELEASE_RESOURCE_NAME, RECEIVER_RESOURCE_NAME, IMAGE_REPOSITORY_RESOURCE_NAME, IMAGE_UPDATE_AUTOMATION_RESOURCE_NAME] },
+    {
+      resource: [BUCKET_RESOURCE_NAME, GIT_REPOSITORY_RESOURCE_NAME, HELM_CHART_RESOURCE_NAME, HELM_REPOSITORY_RESOURCE_NAME, OCI_REPOSITORY_RESOURCE_NAME, KUSTOMIZATION_RESOURCE_NAME, HELM_RELEASE_RESOURCE_NAME, RECEIVER_RESOURCE_NAME, IMAGE_REPOSITORY_RESOURCE_NAME, IMAGE_UPDATE_AUTOMATION_RESOURCE_NAME]
+    },
     {
       label: 'reconcile',
       labelKey: 'flux.reconcile-action-label',
       multiple: true,
-      enabled(ctx: Resource) {
+      enabled(ctx: any) {
+        if (ctx.type === "event") {
+          return false
+        }
         return ctx.canUpdate
       },
       invoke(opts: ActionOpts, values: Resource[]) {
