@@ -1,13 +1,8 @@
 <script>
-import ResourceTable from '@shell/components/ResourceTable';
-import { STATES_ENUM, colorForState, stateDisplay } from '@shell/plugins/dashboard-store/resource-class';
-import { NAME, NAMESPACE, STATE, TYPE } from '@shell/config/table-headers';
-import { sortableNumericSuffix } from '@shell/utils/sort';
-import { NAME as EXPLORER } from '@shell/config/product/explorer';
-import { BadgeState } from '@shell/rancher-components/BadgeState';
+import ResourceRefTable from './ResourceRefTable.vue';
 
 export default {
-  components: { ResourceTable, BadgeState },
+  components: { ResourceRefTable },
 
   props: {
     inventory: {
@@ -16,100 +11,20 @@ export default {
     }
   },
 
-  async fetch() {
-    const inStore = this.$store.getters['currentStore']();
-
-    // allSettled: a single entry with no known schema, missing RBAC, or since-deleted
-    // resource must not block the rest of the table from ever leaving the loading state.
-    await Promise.allSettled(this.rows.map((row) => {
-      return this.$store.dispatch(`${inStore}/find`, { type: row.type, id: row.id });
-    }));
-
-    this.loading = false;
-  },
-
-  data() {
-    return { loading: true };
-  },
-
   computed: {
-    rows() {
-      const cluster = this.$store.getters['clusterId'];
-      const inStore = this.$store.getters['currentStore']();
-      const out = [];
-
-      for (const entry of this.inventory.entries) {
+    refs() {
+      return this.inventory.entries.map((entry) => {
         const [namespace, name, typeApiGroup, typeName] = entry.id.split('_');
-        let id = null;
-        if (namespace) {
-          id = `${namespace}/${name}`;
-        } else {
-          id = `${name}`;
-        }
-        let type = null
-        if (typeApiGroup) {
-          type = `${typeApiGroup}.${typeName.toLowerCase()}`;
-        } else {
-          type = typeName.toLowerCase()
-        }
-        const state = this.$store.getters[`${inStore}/byId`](type, id)?.state || STATES_ENUM.MISSING;
-        const stateColor = colorForState(state);
-        const schema = this.$store.getters[`${inStore}/schemaFor`](type);
+        const id = namespace ? `${namespace}/${name}` : name;
+        const type = typeApiGroup ? `${typeApiGroup}.${typeName.toLowerCase()}` : typeName.toLowerCase();
 
-        const key = `${type}/${namespace}/${name}`;
-
-        const detailLocation = {
-          name: `c-cluster-product-resource${namespace ? '-namespace' : ''}-id`,
-          params: {
-            product: EXPLORER,
-            cluster: inStore === 'management' ? 'local' : cluster,
-            resource: type,
-            namespace,
-            id: name,
-          }
-        };
-
-        out.push({
-          type,
-          id,
-          state,
-          metadata: { namespace, name },
-          _key: key,
-
-          name,
-          namespace,
-          nameDisplay: name,
-          nameSort: sortableNumericSuffix(name).toLowerCase(),
-
-          stateColor,
-          detailLocation,
-          typeDisplay: this.$store.getters['type-map/labelFor'](schema),
-          stateDisplay: stateDisplay(state),
-          stateBackground: stateColor.replace('text-', 'bg-'),
-          groupByLabel: namespace,
-        });
-      }
-
-      return out;
-    },
-
-    headers() {
-      return [
-        STATE,
-        TYPE,
-        NAME,
-        NAMESPACE,
-      ];
+        return { type, id };
+      });
     },
   },
 };
 </script>
 
 <template>
-  <ResourceTable :schema="null" :rows="rows" :headers="headers" :search="true" :table-actions="false"
-    :namespaced="true" :groupable="true" :loading="loading">
-    <template #cell:state="{ row }">
-      <BadgeState :value="row" />
-    </template>
-  </ResourceTable>
+  <ResourceRefTable :refs="refs" />
 </template>

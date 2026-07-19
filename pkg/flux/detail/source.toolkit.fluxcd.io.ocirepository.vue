@@ -2,13 +2,12 @@
 import CreateEditView from '@shell/mixins/create-edit-view';
 import Tab from '@shell/components/Tabbed/Tab';
 import ResourceTabs from '@shell/components/form/ResourceTabs';
-import RelatedResources from '@shell/components/RelatedResources';
-import InventoryResources from '../components/InventoryResources.vue';
+import RelatedFluxResources from '../components/RelatedFluxResources.vue';
 
 export default {
   name: 'OCIRepositoryDetail',
 
-  components: { ResourceTabs, Tab, RelatedResources, InventoryResources },
+  components: { ResourceTabs, Tab, RelatedFluxResources },
 
   mixins: [CreateEditView],
 };
@@ -20,6 +19,12 @@ export default {
     :value="value"
     :needRelated="false"
   >
-    
+    <Tab
+      :label="t('flux.ocirepository.section.related.label')"
+      name="related"
+      :weight="2"
+    >
+      <RelatedFluxResources :value="value" />
+    </Tab>
   </ResourceTabs>
 </template>

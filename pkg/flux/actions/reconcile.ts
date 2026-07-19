@@ -1,13 +1,10 @@
 import { ActionOpts } from '@shell/core/types';
 import Resource from '@shell/plugins/dashboard-store/resource-class';
 import {
-  GIT_REPOSITORY_RESOURCE_NAME,
-  OCI_REPOSITORY_RESOURCE_NAME,
-  BUCKET_RESOURCE_NAME,
-  HELM_REPOSITORY_RESOURCE_NAME,
   HELM_CHART_RESOURCE_NAME,
   KUSTOMIZATION_RESOURCE_NAME,
   HELM_RELEASE_RESOURCE_NAME,
+  SOURCE_KIND_TO_RESOURCE_TYPE,
 } from '../shared-config';
 
 // dashboard-store injects `type`/`metadata`/`spec`/`status` onto Resource instances at
@@ -21,14 +18,13 @@ interface FluxResource extends Resource {
 
 const RECONCILE_ANNOTATION = 'reconcile.fluxcd.io/requestedAt';
 
-// Maps the `kind` used in a Flux sourceRef/chartRef to the resource type this extension registers
-const SOURCE_KIND_TO_RESOURCE_TYPE: Record<string, string> = {
-  GitRepository:  GIT_REPOSITORY_RESOURCE_NAME,
-  OCIRepository:  OCI_REPOSITORY_RESOURCE_NAME,
-  Bucket:         BUCKET_RESOURCE_NAME,
-  HelmRepository: HELM_REPOSITORY_RESOURCE_NAME,
-  HelmChart:      HELM_CHART_RESOURCE_NAME,
-};
+export function canReconcile(ctx: any) {
+  if (ctx.type === 'event') {
+    return false;
+  }
+
+  return ctx.canUpdate;
+}
 
 export function reconcile(value: FluxResource) {
   return value.patch(
