@@ -34,7 +34,7 @@ const routes = [
   },
   {
     name:      `c-cluster-${ FLUX_PRODUCT_NAME }-resource-namespace-id`,
-    path:      `/:cluster/${ FLUX_PRODUCT_NAME }/:resource/:namespace/:id`,
+    path:      `/c/:cluster/${ FLUX_PRODUCT_NAME }/:resource/:namespace/:id`,
     component: ViewNamespacedResource,
     meta:      { product: FLUX_PRODUCT_NAME },
   }

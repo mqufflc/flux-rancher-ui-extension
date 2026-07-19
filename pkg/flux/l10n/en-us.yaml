@@ -1,6 +1,7 @@
 flux:
   dashboard-menu-label: Dashboard
   reconcile-action-label: Reconcile
+  reconcile-source-action-label: Reconcile source
   kustomization:
     section:
       inventory:

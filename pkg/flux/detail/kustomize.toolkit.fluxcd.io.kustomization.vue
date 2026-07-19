@@ -25,7 +25,7 @@ export default {
       name="inventory"
       :weight="3"
     >
-      <InventoryResources :inventory="value.status.inventory" />
+      <InventoryResources :inventory="value.status?.inventory || { entries: [] }" />
     </Tab>
   </ResourceTabs>
 </template>
