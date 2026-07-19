@@ -30,6 +30,7 @@ export default function (plugin: IPlugin): void {
     {
       label: 'reconcile',
       labelKey: 'flux.reconcile-action-label',
+      icon: 'icon icon-refresh',
       multiple: true,
       enabled: canReconcile,
       invoke: reconcileInvoke
@@ -44,6 +45,7 @@ export default function (plugin: IPlugin): void {
     {
       label: 'reconcile source',
       labelKey: 'flux.reconcile-source-action-label',
+      icon: 'icon icon-refresh',
       multiple: true,
       enabled: canReconcile,
       invoke: reconcileSourceInvoke
