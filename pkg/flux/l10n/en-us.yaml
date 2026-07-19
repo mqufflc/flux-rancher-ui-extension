@@ -6,3 +6,7 @@ flux:
     section:
       inventory:
         label: Inventory
+  helmrelease:
+    section:
+      inventory:
+        label: Inventory

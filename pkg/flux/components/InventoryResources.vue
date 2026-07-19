@@ -19,19 +19,13 @@ export default {
   async fetch() {
     const inStore = this.$store.getters['currentStore']();
 
-    const res = await Promise.allSettled(this.rows.map((row) => {
+    // allSettled: a single entry with no known schema, missing RBAC, or since-deleted
+    // resource must not block the rest of the table from ever leaving the loading state.
+    await Promise.allSettled(this.rows.map((row) => {
       return this.$store.dispatch(`${inStore}/find`, { type: row.type, id: row.id });
     }));
 
-    let allfetched = true
-    for (let i = 0; i < res.length; i++) {
-      if (res[i].status !== 'fulfilled') {
-        allfetched = false;
-      }
-    }
-    if (allfetched) {
-      this.loading = false;
-    }
+    this.loading = false;
   },
 
   data() {
@@ -59,7 +53,7 @@ export default {
           type = typeName.toLowerCase()
         }
         const state = this.$store.getters[`${inStore}/byId`](type, id)?.state || STATES_ENUM.MISSING;
-        const stateColor = colorForState(state, entry.error, entry.transitioning);
+        const stateColor = colorForState(state);
         const schema = this.$store.getters[`${inStore}/schemaFor`](type);
 
         const key = `${type}/${namespace}/${name}`;

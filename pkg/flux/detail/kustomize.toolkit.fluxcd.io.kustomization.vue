@@ -2,13 +2,12 @@
 import CreateEditView from '@shell/mixins/create-edit-view';
 import Tab from '@shell/components/Tabbed/Tab';
 import ResourceTabs from '@shell/components/form/ResourceTabs';
-import RelatedResources from '@shell/components/RelatedResources';
 import InventoryResources from '../components/InventoryResources.vue';
 
 export default {
   name: 'KustomizeDetail',
 
-  components: { ResourceTabs, Tab, RelatedResources, InventoryResources },
+  components: { ResourceTabs, Tab, InventoryResources },
 
   mixins: [CreateEditView],
 };
